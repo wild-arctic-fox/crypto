@@ -14,7 +14,7 @@
     "outDir": "dist",
   },
   "files": [
-    "src/huge_num.ts",
+    "src/sp_network.ts",
   ],
   "exclude": [
     "node_modules",
