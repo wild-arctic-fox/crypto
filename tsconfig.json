@@ -14,7 +14,7 @@
     "outDir": "dist",
   },
   "files": [
-    "src/huge_num.ts",
+    "src/randomness_check.ts",
   ],
   "exclude": [
     "node_modules",

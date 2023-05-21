@@ -1,34 +1,21 @@
-# Working with large numbers. Logical and arithmetic operations
+# Testing keys for randomness according to the FIPS-140 standard
 
-## The **GigantoUnsignedInteger** class is designed to store large numbers as an array of integers (Uint8Array) from 0 to 255.
+## The **RandomCheckFIPS140** class is designed to testing keys for randomness according to the FIPS-140 standard (20_000 bits length)
 
 ### Implemented functions:
-- Giganto number creation from:
-    - Uint8Array
-    - Binary String
-    - Hex String
-- Retrieving giganto numbers in formats: Uint8Array, Binary, Hex
-- Logical operations:
-    - or
-    - and
-    - xor
-    - inv
-    - shift left
-    - shift right
-- Math operations:
-    - add
-    - subtract
-    - multiply (Karatsuba method)
-    - compare
+- Functions that generates random bit sequences:
+    - generateSecureRandomFixedBitSequence() - generates secure balanced bit sequeces that should pass all tests
+    - generateUnbalancedRandomFixedBitSequence() - generates unbalanced bit sequeces that should not pass tests (all or partially)
+- Randomness checks:
+    - checkMonobits() - monobit test 
+    - checkSeriesSize() - test maximum series length (36 bit)
+    - checkSequenceSizes() - test series length
+    - checkPoker() - poker test
 
-### To run test localy use:
+### To run localy use:
 ```npm i``` <br>
-```npm test```
+```npm start```
 
 ### Test execution result:
-![](/img/2023-05-09_17-08.png "Test")
+![](/img/2023-05-21_14-38.png "Test")
 
-
-
-### To compile and use:
-```npm start```

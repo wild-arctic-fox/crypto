@@ -1,20 +1,16 @@
 {
-    "name": "crypto_lab2",
+    "name": "crypto_lab4",
     "version": "1.0.0",
     "description": "",
-    "main": "huge_num.ts",
+    "main": "randomness_check.ts",
     "scripts": {
-        "test": "jest",
-        "start": "rimraf dist && tsc && node dist/huge_num.js"
+        "start": "rimraf dist && tsc && node dist/randomness_check.js"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@types/jest": "^29.5.1",
         "@types/node": "^20.1.0",
-        "jest": "^29.5.0",
         "rimraf": "^5.0.0",
-        "ts-jest": "^29.1.0",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4"
     }
