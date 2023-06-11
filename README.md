@@ -1,34 +1,20 @@
-# Working with large numbers. Logical and arithmetic operations
+# El-Gamal's algorithm. Digital signature. Directional encryption
 
-## The **GigantoUnsignedInteger** class is designed to store large numbers as an array of integers (Uint8Array) from 0 to 255.
+## The **ElGamal** class is designed to create digital signatures and check them & encrypt/decrypt messages via ElGamal
 
 ### Implemented functions:
-- Giganto number creation from:
-    - Uint8Array
-    - Binary String
-    - Hex String
-- Retrieving giganto numbers in formats: Uint8Array, Binary, Hex
-- Logical operations:
-    - or
-    - and
-    - xor
-    - inv
-    - shift left
-    - shift right
-- Math operations:
-    - add
-    - subtract
-    - multiply (Karatsuba method)
-    - compare
-
-### To run test localy use:
-```npm i``` <br>
-```npm test```
-
-### Test execution result:
-![](/img/2023-05-09_17-08.png "Test")
+- Directional encryption
+    - KeyGen - generates private and public keys
+    - Encrypt - encrypts message with public keys
+    - Decrypt - decrypts message only with private key
 
 
+Source with example ElGamal digital signature (pages 9-13)
+**[ElGamalExample](https://www.flt-info.eu/wp-content/uploads/2022/06/Signatures.pdf)**
+- Digital signature
+    - CreateDigitalSignature - signs message with private key
+    - CheckDigitalSignature - verifies signature with public key
 
-### To compile and use:
-```npm start```
+
+### Execution result:
+![](./img/2023-06-11_17-34.png "Test")
