@@ -1,21 +1,20 @@
 {
-    "name": "crypto_lab2",
-    "version": "1.0.0",
-    "description": "",
-    "main": "huge_num.ts",
-    "scripts": {
-        "test": "jest",
-        "start": "rimraf dist && tsc && node dist/huge_num.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@types/jest": "^29.5.1",
-        "@types/node": "^20.1.0",
-        "jest": "^29.5.0",
-        "rimraf": "^5.0.0",
-        "ts-jest": "^29.1.0",
-        "ts-node": "^10.9.1",
-        "typescript": "^5.0.4"
-    }
+  "name": "crypto-model",
+  "version": "1.0.0",
+  "description": "",
+  "main": "-",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "wild-arctic-fox",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "colors": "^1.4.0",
+    "connect": "^3.7.0",
+    "express": "^4.18.2",
+    "http-proxy": "^1.18.1"
+  }
 }
