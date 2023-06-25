@@ -1,34 +1,42 @@
-# Working with large numbers. Logical and arithmetic operations
+# Working with elliptic curves (custom)
 
-## The **GigantoUnsignedInteger** class is designed to store large numbers as an array of integers (Uint8Array) from 0 to 255.
+## The **EllipticCurve** class is designed to wrapp tinyec library that implements all elliptic curve logic. There no use standard approved curves, other libs provide all options for using ecc. Here is class and examples for understanding only.
+
 
 ### Implemented functions:
-- Giganto number creation from:
-    - Uint8Array
-    - Binary String
-    - Hex String
-- Retrieving giganto numbers in formats: Uint8Array, Binary, Hex
-- Logical operations:
-    - or
-    - and
-    - xor
-    - inv
-    - shift left
-    - shift right
+- Checks:
+    - is_on_curve_check
+    - equals_points
 - Math operations:
-    - add
-    - subtract
-    - multiply (Karatsuba method)
-    - compare
+    - double_ec_point
+    - scalar_mult
+    - add_ec_points
+- Internal validation:
+    - _validate_positive_int
+    - _validate_mod
+    - _validate_coordinates
+- Other:
+    - compress
+    - print_ec_point
+    - get_generator_point
 
-### To run test localy use:
-```npm i``` <br>
-```npm test```
+### To run localy:
+``` 
+pip install pycryptodome
+pip install primePy
+pip install tinyec
+python3 ecc.py
+```
 
-### Test execution result:
-![](/img/2023-05-09_17-08.png "Test")
+### Execution result:
+![](/img/2023-06-25_21-11.png "Test")
+
+### Resources 
+https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc.html
+
+http://www.secg.org/sec1-v2.pdf
 
 
+https://www.youtube.com/watch?v=F3zzNa42-tQ
 
-### To compile and use:
-```npm start```
+https://www.youtube.com/watch?v=NF1pwjL9-DE
