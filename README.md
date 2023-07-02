@@ -1,7 +1,8 @@
 # Working with elliptic curves (custom)
 
-## The **EllipticCurve** class is designed to wrapp tinyec library that implements all elliptic curve logic. There no use standard approved curves, other libs provide all options for using ecc. Here is class and examples for understanding only.
+## Using secp192r1 params for keys generation and ECDH
 
+### The **EllipticCurve** class is designed to wrapp tinyec library that implements all elliptic curve logic. There no use standard approved curves, other libs provide all options for using ecc. Here is class and examples for understanding only.
 
 ### Implemented functions:
 - Checks:
@@ -29,7 +30,7 @@ python3 ecc.py
 ```
 
 ### Execution result:
-![](/img/2023-06-25_21-11.png "Test")
+![](/img/2023-07-02_20-59.png "Test")
 
 ### Resources 
 https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc.html

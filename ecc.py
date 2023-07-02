@@ -5,11 +5,9 @@ from Crypto.Util import number
 
 # Wrapper class that used for educational purpose only (full crypto libs had already implemented all ec cryptography)
 class EllipticCurve:
-    def __init__(self, x, y, p, a, b):
-        self._validate_coordinates(x=x, y=y, p=p)
-        self._validate_mod(p=p)
+    def __init__(self, x, y, p, a, b, n, h):
 
-        field = SubGroup(p=p, g=(x, y), n=p + 1, h=1)
+        field = SubGroup(p=p, g=(x, y), n=n, h=h)
         curve = Curve(a=a, b=b, field=field, name='any')
         self.curve = curve
         self.x = x
@@ -26,7 +24,7 @@ class EllipticCurve:
 
     def _validate_mod(self, p):
         # Check if p is prime and p > 3
-        if not primes.check(p):
+        if not primes.check(p) and p < 3:
             raise ValueError("p must be a prime number greater than 3.")
 
     def _validate_coordinates(self, x, y, p):
@@ -69,56 +67,46 @@ class EllipticCurve:
         return doubled_point
 
     # Compress an EC point to a compressed key representation
-    def compress(self):
-        return hex(self.x) + hex(self.y % 2)[2:]
+    def compress(self, point):
+        return hex(point.x) + hex(point.y % 2)[2:]
 
     # Print the coordinates of the ECPoint
     def print_ec_point(point):
         print(f"({point.x}, {point.y})")
 
 
-# Set up all parameters for elliptic curve (a,b: curve vars, p: mod, x,y: start point)
-el_test_curve = EllipticCurve(x=2, y=10, p=17, a=0, b=7)
-print("Curve: y^2=x^3+7. Mod = 17")
+# Using secp192r1 params
+p = 0xfffffffffffffffffffffffffffffffeffffffffffffffff
+a = 0xfffffffffffffffffffffffffffffffefffffffffffffffc
+b = 0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1
+x = 0x188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012
+y = 0x07192b95ffc8da78631011ed6b24cdd573f977a11e794811
+n = 0xffffffffffffffffffffffff99def836146bc9b1b4d22831
+h = 0x1
 
-# Set up k and d (will use that numbers as private keys in the future)
-k = number.getPrime(256)
-d = number.getPrime(256)
-print("k:", k)
-print("d:", d)
+el_test_curve = EllipticCurve(x=x, y=y, p=p, a=a, b=b, n=n, h=h)
+print("Curve: ", el_test_curve.curve)
 
 print("Base point G:", el_test_curve.get_generator_point())
-print("Is on Curve (12, 1):", el_test_curve.is_on_curve_check(x=12, y=1))
 
-point_str = el_test_curve.compress()
-print("Convert point to string:", point_str)
+alicePrivKey = int(input("Input private key [0-(n-1)]:"))
+print("Alice private key:", alicePrivKey)
+alicePubKey = el_test_curve.scalar_mult(k=alicePrivKey)
+alice_ec = EllipticCurve(x=alicePubKey.x, y=alicePubKey.y, p=p, a=a, b=b, n=n, h=h)
+print("Alice public key:", alicePubKey.x, alicePubKey.y)
 
-print('---------------------------------')
-print('Test scalar multiplication')
-for k in range(0, 29):
-    point = el_test_curve.scalar_mult(k=k)
-    print(f"{k} * G = ({point.x}, {point.y})")
+bobPrivKey = int(input("Input private key [0-(n-1)]:"))
+print("Bob private key:", alicePrivKey)
+bobPubKey = el_test_curve.scalar_mult(k=bobPrivKey)
+bob_ec = EllipticCurve(x=bobPubKey.x, y=bobPubKey.y, p=p, a=a, b=b, n=n, h=h)
+print("Bob public key:", bobPubKey.x, bobPubKey.y)
 
-print('---------------------------------')
-print('Test point addition')
-new_added_point = el_test_curve.add_ec_points(x=6, y=6)
-print('New added point:', new_added_point)
+print("Now exchange the public keys (e.g. through Internet)")
 
-print('---------------------------------')
-print('Final test')
-G = EllipticCurve(x=15, y=13, p=17, a=0, b=7)
+aliceSharedKey = bob_ec.scalar_mult(alicePrivKey)
+print("Alice shared key:", aliceSharedKey.x, aliceSharedKey.y)
 
-H1 = el_test_curve.scalar_mult(k=d)
-G2 = EllipticCurve(x=H1.x, y=H1.y, p=17, a=0, b=7)
-H2 = G2.scalar_mult(k=k)
+bobSharedKey = alice_ec.scalar_mult(bobPrivKey)
+print("Bob shared key:", bobSharedKey.x, bobSharedKey.y)
 
-H3 = el_test_curve.scalar_mult(k=k)
-G3 = EllipticCurve(x=H3.x, y=H3.y, p=17, a=0, b=7)
-H4 = G3.scalar_mult(k=d)
-
-G5 = EllipticCurve(x=H2.x, y=H2.y, p=17, a=0, b=7)
-
-eq = G5.equals_points(H4.x, H4.y)
-print("Check equality:", eq)
-print("Point 1:", H2)
-print("Point 2:", H4)
+print("Equal shared keys:", aliceSharedKey.x == bobSharedKey.x)
