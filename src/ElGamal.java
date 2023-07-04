@@ -1,15 +1,17 @@
+package src;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
- * Security of the ElGamal algorithm depends on the difficulty of computing discrete logs
+ * Security of the src.ElGamal algorithm depends on the difficulty of computing discrete logs
  * in a large prime modulus
  */
 public final class ElGamal {
     /**
-     * Generate the public key and the secret key for the ElGamal encryption.
+     * Generate the public key and the secret key for the src.ElGamal encryption.
      *
      * @param bitLength key size
      * @return key pair (public & private)
@@ -39,7 +41,7 @@ public final class ElGamal {
     }
 
     /**
-     * Encrypt ElGamal
+     * Encrypt src.ElGamal
      *
      * @param (p,g,b) public keys
      * @param (m)     message
@@ -60,7 +62,7 @@ public final class ElGamal {
     }
 
     /**
-     * Decrypt ElGamal
+     * Decrypt src.ElGamal
      *
      * @param (a)   secret key
      * @param (p)   public prime
@@ -86,7 +88,7 @@ public final class ElGamal {
     }
 
     /**
-     * Check Signature ElGamal
+     * Check Signature src.ElGamal
      *
      * @param (r,s)           signed message
      * @param (p,g,publicKey) public keys
@@ -106,8 +108,13 @@ public final class ElGamal {
         return leftEquation.equals(rightEquation);
     }
 
+    private static BigInteger generateCoprime(BigInteger p, Random random) {
+        BigInteger k = new BigInteger(p.bitLength(), random);
+        return k.gcd(p).equals(BigInteger.ONE) ? k : generateCoprime(p, random);
+    }
+
     /**
-     * Create Signature ElGamal
+     * Create Signature src.ElGamal
      *
      * @param (p,g)        public keys
      * @param (privateKey) private key
@@ -117,7 +124,15 @@ public final class ElGamal {
     public static List<BigInteger> CreateDigitalSignature(BigInteger p, BigInteger g, String message, BigInteger privateKey) {
         // random k in interval [1, p-1].
         BigInteger pSubtractOne = p.subtract(BigInteger.ONE);
-        BigInteger k = randNum(pSubtractOne, new Random());
+//        BigInteger k = randNum(pSubtractOne, new Random());
+        // take a random element g the primitive root p (coprime with p).
+        BigInteger k = generateCoprime(p, new Random());
+        //BigInteger pSubtractOne = p.subtract(BigInteger.ONE);
+
+        // Ensure kInverse exists
+        while (k.gcd(pSubtractOne).compareTo(BigInteger.ONE) != 0) {
+            k = generateCoprime(p, new Random());
+        }
 
         // k^-1 mod p-1
         BigInteger kInverse = k.modInverse(pSubtractOne);
