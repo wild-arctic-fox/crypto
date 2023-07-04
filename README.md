@@ -19,6 +19,10 @@
     - compress
     - print_ec_point
     - get_generator_point
+- Math EXTENDED:
+    - double_ec_point_extended
+    - scalar_mult_extended
+    - add_ec_points_extended
 
 ### To run localy:
 ``` 
@@ -28,14 +32,19 @@ pip install tinyec
 python3 ecc.py
 ```
 
-### Execution result:
+### Execution result 1:
 ![](/img/2023-06-25_21-11.png "Test")
+
+### Execution result 2:
+![](/img/2023-07-04_16-55.png "Test")
+![](/img/2023-07-04_16-56.png "Test")
+![](/img/2023-07-04_16-56_1.png "Test")
+
 
 ### Resources 
 https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc.html
 
 http://www.secg.org/sec1-v2.pdf
-
 
 https://www.youtube.com/watch?v=F3zzNa42-tQ
 
