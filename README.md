@@ -1,34 +1,17 @@
-# Working with large numbers. Logical and arithmetic operations
+# Implementing SHA-256
 
-## The **GigantoUnsignedInteger** class is designed to store large numbers as an array of integers (Uint8Array) from 0 to 255.
+## This is Demo version that works only with 1 chunk
+## It requires much more time and memory compared to NodeJS implementation for execution out of using strings instead of numbers
+## Inspired by https://sha256algorithm.com/
 
-### Implemented functions:
-- Giganto number creation from:
-    - Uint8Array
-    - Binary String
-    - Hex String
-- Retrieving giganto numbers in formats: Uint8Array, Binary, Hex
-- Logical operations:
-    - or
-    - and
-    - xor
-    - inv
-    - shift left
-    - shift right
-- Math operations:
-    - add
-    - subtract
-    - multiply (Karatsuba method)
-    - compare
 
-### To run test localy use:
+### To run  localy use:
 ```npm i``` <br>
-```npm test```
+```npm start```
 
 ### Test execution result:
-![](/img/2023-05-09_17-08.png "Test")
+![](/img/scr.png "Test")
 
 
 
-### To compile and use:
-```npm start```
+

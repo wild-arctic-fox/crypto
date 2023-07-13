@@ -14,7 +14,7 @@
     "outDir": "dist",
   },
   "files": [
-    "src/huge_num.ts",
+    "src/sha256.ts",
   ],
   "exclude": [
     "node_modules",
